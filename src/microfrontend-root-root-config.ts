@@ -1,20 +1,36 @@
-import { registerApplication, start } from "single-spa";
+import { registerApplication, start } from 'single-spa';
 import {
   constructApplications,
-  constructRoutes,
   constructLayoutEngine,
-} from "single-spa-layout";
-import microfrontendLayout from "./microfrontend-layout.html";
+  constructRoutes,
+} from 'single-spa-layout';
+import microfrontendLayout from './microfrontend-layout.html';
 
-const routes = constructRoutes(microfrontendLayout);
-const applications = constructApplications({
-  routes,
-  loadApp({ name }) {
-    return System.import(name);
-  },
-});
-const layoutEngine = constructLayoutEngine({ routes, applications });
+async function boostrap() {
+  // const navbar = await System.import("@microfrontend-navbar");
+  // registerApplication({
+  //   name: "@microfrontend-navbar",
+  //   app: navbar.default,
+  //   activeWhen: ["/"],
+  // });
 
-applications.forEach(registerApplication);
-layoutEngine.activate();
-start();
+  const routes = constructRoutes(microfrontendLayout);
+  const applications = constructApplications({
+    routes,
+    loadApp({ name }) {
+      return System.import(name);
+    },
+  });
+  const layoutEngine = constructLayoutEngine({ routes, applications });
+
+  applications.forEach((app) =>
+    registerApplication({ ...app, customProps: {} })
+  );
+
+  await Promise.all(['@mfe-lib/styleguide', '@microfrontend-navbar']);
+
+  layoutEngine.activate();
+  start();
+}
+
+boostrap();
