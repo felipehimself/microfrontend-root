@@ -15,6 +15,7 @@
     <style>
       body {
         background: #fafafa !important;
+        display: flex;
       }
     </style>
     <!--
@@ -71,9 +72,10 @@
     <script type="systemjs-importmap">
       {
         "imports": {
+          "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js",
           "@microfrontend-root/root-config": "http://localhost:9000/microfrontend-root-root-config.js",
           "@microfrontend-navbar": "http://localhost:4300/system/microfrontend-navbar.js",
-          "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js"
+          "@microfrontend-dashboard": "http://localhost:4301/system/microfrontend-dashboard.js"
         }
       }
     </script>

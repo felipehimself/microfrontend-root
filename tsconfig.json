@@ -2,7 +2,8 @@
   "extends": "ts-config-single-spa",
   "files": ["src/microfrontend-root-root-config.ts"],
   "compilerOptions": {
-    "declarationDir": "dist"
+    "declarationDir": "dist",
+    "target": "es2015"
   },
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test*"]
