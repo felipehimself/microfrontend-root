@@ -16,6 +16,7 @@
       body {
         background: #fafafa !important;
         display: flex;
+        margin: 0;
       }
     </style>
     <!--
@@ -50,15 +51,17 @@
       {
         "imports": {
           "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-          "@mui/material": "https://unpkg.com/@mui/material@5.15.17/umd/material-ui.production.min.js",
+          
           "@emotion/react": "https://unpkg.com/@emotion/react@11.1.1/dist/emotion-react.umd.min.js",
           "@emotion/styled": "https://unpkg.com/@emotion/styled@11.11.0/dist/emotion-styled.umd.min.js",
           "react": "https://unpkg.com/react@18.2.0/umd/react.production.min.js",
-          "react-dom": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js",
-          "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js"
+          "react-dom": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"
+         
         }
       }
     </script>
+    <!-- "@mui/material": "https://unpkg.com/@mui/material@5.15.17/umd/material-ui.production.min.js", -->
+    <!-- "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js" -->
     <link
       rel="preload"
       href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
@@ -72,15 +75,19 @@
     <script type="systemjs-importmap">
       {
         "imports": {
-          "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js",
+         
           "@microfrontend-root/root-config": "http://localhost:9000/microfrontend-root-root-config.js",
-          "@microfrontend-navbar": "http://localhost:4300/system/microfrontend-navbar.js",
-          "@microfrontend-dashboard": "http://localhost:4301/system/microfrontend-dashboard.js"
+          "@microfrontend-dashboard": "http://localhost:4302/system/microfrontend-dashboard.js" ,
+          "@microfrontend-announcements": " http://localhost:4301/system/microfrontend-announcements.js", 
+          "@microfrontend-navbar": "http://localhost:4304/system/microfrontend-navbar.js",
+          "@microfrontend-jobpostings": "http://localhost:4303/system/microfrontend-jobpostings.js"
+          
         }
       }
     </script>
     <% } %>
-
+    <!-- "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js", -->
+    <!-- "@microfrontend-dashboard": "http://localhost:4301/system/microfrontend-dashboard.js" -->
     <!--
     If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
     Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
@@ -100,7 +107,7 @@
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <script>
       System.import('@microfrontend-root/root-config');
-      System.import('@mfe-lib/styleguide');
+      
     </script>
     <import-map-overrides-full
       show-when-local-storage="devtools"
