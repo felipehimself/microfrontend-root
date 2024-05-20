@@ -13,6 +13,11 @@
 
     <title>Mfe Root</title>
     <style>
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
       body {
         background: #fafafa !important;
         display: flex;
@@ -51,7 +56,6 @@
       {
         "imports": {
           "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-          
           "@emotion/react": "https://unpkg.com/@emotion/react@11.1.1/dist/emotion-react.umd.min.js",
           "@emotion/styled": "https://unpkg.com/@emotion/styled@11.11.0/dist/emotion-styled.umd.min.js",
           "react": "https://unpkg.com/react@18.2.0/umd/react.production.min.js",
@@ -78,9 +82,9 @@
          
           "@microfrontend-root/root-config": "http://localhost:9000/microfrontend-root-root-config.js",
           "@microfrontend-dashboard": "http://localhost:4302/system/microfrontend-dashboard.js" ,
-          "@microfrontend-announcements": " http://localhost:4301/system/microfrontend-announcements.js", 
           "@microfrontend-navbar": "http://localhost:4304/system/microfrontend-navbar.js",
-          "@microfrontend-jobpostings": "http://localhost:4303/system/microfrontend-jobpostings.js"
+          "@microfrontend-jobpostings": "http://localhost:4303/system/microfrontend-jobpostings.js",
+          "@microfrontend-announcements": " http://localhost:4301/system/microfrontend-announcements.js"
           
         }
       }
