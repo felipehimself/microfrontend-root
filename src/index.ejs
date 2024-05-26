@@ -64,8 +64,7 @@
         }
       }
     </script>
-    <!-- "@mui/material": "https://unpkg.com/@mui/material@5.15.17/umd/material-ui.production.min.js", -->
-    <!-- "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js" -->
+
     <link
       rel="preload"
       href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
@@ -80,23 +79,61 @@
       {
         "imports": {
          
-          "@microfrontend-root/root-config": "http://localhost:9000/microfrontend-root-root-config.js",
+          "@microfrontend-root": "http://localhost:9000/microfrontend-root-root-config.js",
           "@microfrontend-dashboard": "http://localhost:4302/system/microfrontend-dashboard.js" ,
           "@microfrontend-navbar": "http://localhost:4304/system/microfrontend-navbar.js",
           "@microfrontend-jobpostings": "http://localhost:4303/system/microfrontend-jobpostings.js",
-          "@microfrontend-announcements": " http://localhost:4301/system/microfrontend-announcements.js"
+          "@microfrontend-announcements": "http://localhost:4301/system/microfrontend-announcements.js"
           
         }
       }
     </script>
+    <% } else { %>
+
+      <script>
+
+        async function addImportmap  ()  {
+        const hostname = window.location.hostname;
+
+        const isDevEnv = hostname.startsWith("dev-");
+        
+        const scriptEl = document.createElement("script");
+
+        scriptEl.type = "systemjs-importmap";
+
+        let importMapUrl = "";
+
+        if(isDevEnv) {
+          importMapUrl = "https://mfe-importmap-dev.onrender.com/import-map.json";
+        } else {
+          importMapUrl = "https://mfe-importmap-prod.onrender.com/import-map.json";
+        }
+
+        scriptEl.src = importMapUrl;
+        
+        document.head.appendChild(scriptEl);
+
+        if (typeof System !== 'undefined' && System.updateImportMap) {
+          const response = await fetch(importMapURL);
+          if (response.ok) {
+            const importMapConfig = await response.json();
+            System.updateImportMap(importMapConfig);
+          } else {
+            console.error('Failed to fetch the import map configuration from the provided URL. Please check the URL and try again.');
+            return;
+          }
+        }
+
+      }
+
+      addImportmap();
+            
+      </script>
+
     <% } %>
+
     <!-- "@mfe-lib/styleguide": "http://localhost:4173/system/styleguide.js", -->
-    <!-- "@microfrontend-dashboard": "http://localhost:4301/system/microfrontend-dashboard.js" -->
-    <!--
-    If you need to support Angular applications, uncomment the script tag below to ensure only one instance of ZoneJS is loaded
-    Learn more about why at https://single-spa.js.org/docs/ecosystem-angular/#zonejs
-  -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/zone.js@0.11.3/dist/zone.min.js"></script> -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
     <% if (isLocal) { %>
@@ -110,7 +147,7 @@
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
     <script>
-      System.import('@microfrontend-root/root-config');
+      System.import('@microfrontend-root');
       
     </script>
     <import-map-overrides-full
