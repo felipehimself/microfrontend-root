@@ -1,0 +1,34 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows: [ "CI" ]
+    types:
+      - completed
+  workflow_dispatch:
+  
+jobs:
+  dev-deploy:
+    name: Dev Deployment
+    environment: DEV
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Deploy to dev
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+           service-id: ${{ secrets.RENDER_SERVICE_ID_DEV }}
+           api-key: ${{ secrets.RENDER_API_KEY_DEV }}
+
+
+  prod-deploy:
+    name: Prod Deployment
+    environment: PROD
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Deploy to prod
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+           service-id: ${{ secrets.RENDER_SERVICE_ID_PROD }}
+           api-key: ${{ secrets.RENDER_API_KEY_PROD }}
