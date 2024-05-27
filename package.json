@@ -8,7 +8,7 @@
     "check-format": "prettier --check .",
     "prepare": "husky install",
     "build": "concurrently npm:build:*",
-    "build:webpack": "webpack --mode=production && cp ./public/_redirects ./dist",
+    "build:webpack": "webpack --mode=production",
     "build:types": "tsc"
   },
   "devDependencies": {
