@@ -37,7 +37,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build:webpack
 
       - name: Publish to Netlify
         uses: nwtgck/actions-netlify@v1.2.3
@@ -81,7 +81,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build:webpack
 
       - name: Publish to Netlify
         uses: nwtgck/actions-netlify@v1.2.3
