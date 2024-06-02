@@ -23,6 +23,25 @@
         display: flex;
         margin: 0;
       }
+
+      .main {
+        flex: 1;
+      }
+
+      .not-found--container {
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .not-found--container.dark {
+        background-color: #292929;
+        color: #fafafa;
+      }
+
     </style>
     <!--
     Remove this if you only support browsers that support async/await.
@@ -143,6 +162,9 @@
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
     <% } %>
+
+
+      
   </head>
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>
@@ -150,6 +172,51 @@
       System.import('@microfrontend-root');
       
     </script>
+
+    <script>
+      const isLightTheme = () =>   (localStorage.getItem('mfe-theme') ?? 'light') === 'light';
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new MutationObserver(() => {
+          if (document.querySelector('.not-found--container')) {
+            const notFoundContainer = document.querySelector('.not-found--container');
+
+            const isLight = isLightTheme();
+
+            if (!isLight) {
+              notFoundContainer.classList.add('dark');
+            }
+              
+          }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+      })
+
+    </script>
+
+    <script>
+
+        const observer = new MutationObserver(() => {
+          
+          if (localStorage.getItem('mfe-theme')) {
+            const isLight = isLightTheme();
+            const notFoundContainer = document.querySelector('.not-found--container');
+
+            if (isLight && notFoundContainer) {
+              notFoundContainer.classList.remove('dark');
+            }
+              
+          }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+    </script>
+
+
     <import-map-overrides-full
       show-when-local-storage="devtools"
       dev-libs

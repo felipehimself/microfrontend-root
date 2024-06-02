@@ -20,7 +20,7 @@
   <nav>
     <application name="@microfrontend-navbar"></application>
   </nav>
-  <main style="flex: 1;">
+  <main class="main">
     <route path="dashboard">
       <application name="@microfrontend-dashboard"></application>
     </route>
@@ -33,9 +33,15 @@
       <application name="@microfrontend-jobpostings"></application>
     </route>
 
-
     <route default>
       <application name="@microfrontend-home"></application>
+    </route>
+
+    <route path="not-found">
+      <div class="not-found--container">
+        <h1 class="not-found--header">404</h1>
+        <p class="not-found--text">Page not found</p>
+      </div>
     </route>
   </main>
 </single-spa-router>
