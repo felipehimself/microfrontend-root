@@ -18,14 +18,31 @@
         margin: 0;
         padding: 0;
       }
+
       body {
         background: #fafafa !important;
         display: flex;
         margin: 0;
       }
 
+      body.dark {
+        background: #292929 !important;
+      }
+
+      .nav {
+        position: fixed;
+      }
+
       .main {
         flex: 1;
+        transition: margin-left 0.3s ease;
+        margin-left: 16rem;
+        
+      }
+      
+      .main.close {
+        margin-left: 3.5rem;
+
       }
 
       .not-found--container {
@@ -182,7 +199,6 @@
         const observer = new MutationObserver(() => {
           if (document.querySelector('.not-found--container')) {
             const notFoundContainer = document.querySelector('.not-found--container');
-
             const isLight = isLightTheme();
 
             if (!isLight) {
@@ -195,6 +211,27 @@
         observer.observe(document.body, { childList: true, subtree: true });
       })
 
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const observer = new MutationObserver(() => {
+          if (document.body) {
+            const body = document.body;
+
+            const isLight = isLightTheme();
+
+            if (!isLight) {
+              body.classList.add('dark');
+            } else {
+              body.classList.remove('dark');
+            }
+              
+          }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+      })
     </script>
 
     <script>
@@ -213,6 +250,24 @@
         });
 
         observer.observe(document.body, { childList: true, subtree: true });
+
+    </script>
+
+    <script>
+        const navbarSizeChannel = new BroadcastChannel('navbarSizeChannel');
+
+        navbarSizeChannel.onmessage = (event) => {
+          const isOpen = event.data.openNav;
+         
+          const main = document.querySelector('main');
+
+          if(!isOpen) {
+            main.classList.add('close');
+          } else {
+            main.classList.remove('close');
+          }
+        };
+
 
     </script>
 
